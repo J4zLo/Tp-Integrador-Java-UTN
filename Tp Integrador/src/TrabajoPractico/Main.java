@@ -8,29 +8,27 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         System.out.println("Hello world!");
 
         //Leer Archivo Partidos
-        String miArchivoPartidos = "C:\\Users\\PC\\Documents\\GitHub\\Tp-Integrador-Java-UTN\\Partido.csv";
-        Path ruta;
-        List<String> lineasPartidos = null;
+        String miArchivoPartidos = "C:\\Users\\PC\\Desktop\\Trabajo integrador\\Partido.csv";
+        Path ruta = Paths.get(miArchivoPartidos);
+        List<String> lineasArchivoPartidos = null;
         try {
-            ruta = Paths.get(miArchivoPartidos);
-            lineasPartidos = Files.readAllLines(ruta);
+            lineasArchivoPartidos = Files.readAllLines(ruta);
+        } catch (IOException e) {
+            System.out.println("ERROR: No se pudo encontrar el archivo " + miArchivoPartidos);
 
-        } catch (
-                IOException e) {
-            e.printStackTrace();
-            for (String lineaArchivoPartido : lineasPartidos) {
-                System.out.println(lineaArchivoPartido);
         }
+        for (String lineaArchivoPartido : lineasArchivoPartidos) {
+          
+        }System.out.println(lineasArchivoPartidos);
 
         //Leer Archivo Pronosticos
 
         //Calcular los puntos y mostrar los resultados
 
-
-        }
     }
+
 }//Fin
