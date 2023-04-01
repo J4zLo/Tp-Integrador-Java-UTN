@@ -11,17 +11,15 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
 
-        //Leer Archivo Partidos
-        String miArchivoPartidos = "C:\\Users\\PC\\Desktop\\Trabajo integrador\\Partido.csv";
-        Path ruta = Paths.get(miArchivoPartidos);
+        //Leer Archivo Partidos String miArchivoPartidos = "C:\\Users\\PC\\Desktop\\Trabajo integrador\\Partido.csv";
+        Path ruta = Paths.get(args[0]);
         List<String> lineasArchivoPartidos = null;
-        String[] lineaUnPartido = null;
         List<Partido> partidos = new ArrayList<Partido>();
 
         try {
             lineasArchivoPartidos = Files.readAllLines(ruta);
         } catch (IOException e) {
-            System.out.println("ERROR: No se pudo encontrar el archivo " + miArchivoPartidos);
+            System.out.println("ERROR: No se pudo encontrar el archivo " + args[0]);
             System.exit(1);
         }
         //Agrego aux (boolean esEncabezado) para no leer el encabezado.
@@ -43,21 +41,17 @@ public class Main {
                 partidos.add(partido);
             }
 
-
         }
 
-        //Leer Archivo Pronosticos
-        String miArchivoPronosticos = "C:\\Users\\PC\\Desktop\\Trabajo integrador\\Pronostico.csv";
-        Path ruta2 = Paths.get(miArchivoPronosticos);
+        //Leer Archivo Pronosticos String miArchivoPronosticos = "C:\\Users\\PC\\Desktop\\Trabajo integrador\\Pronostico.csv";
+        Path ruta2 = Paths.get(args[1]);
         List<String> lineasArchivoPronosticos = null;
-        String[] lineaUnPronostico = null;
-        List<Pronostico> pronosticos = new ArrayList<Pronostico>();
         int puntos = 0;
 
         try {
             lineasArchivoPronosticos = Files.readAllLines(ruta2);
         } catch (IOException e) {
-            System.out.println("ERROR: No se pudo encontrar el archivo " + miArchivoPronosticos);
+            System.out.println("ERROR: No se pudo encontrar el archivo " + args[1]);
             System.exit(1);
         }
         esEncabezado = true;
@@ -69,39 +63,35 @@ public class Main {
             //Si el encabezado no es true entonces imprimo por pantalla.
             else {
                 String[] campos = lineaArchivoPronostico.split(";");
-                Equipo equipoLocal = new Equipo(campos[0]);
-                Equipo equipoVisitante = new Equipo(campos[4]);
-                Partido partido = null;
+                Equipo equipo1 = new Equipo(campos[0]);
+                Equipo equipo2 = new Equipo(campos[4]);
+                Partido parti = null;
 
                 for (Partido partidoCol : partidos) {
-                    if (partidoCol.getEquipoLocal().getNombre().equals(campos[0]) &&
-                            partidoCol.getEquipoVisitante().getNombre().equals(campos[4])) ;
-                    partido = partidoCol;
+                    if (partidoCol.getEquipoLocal().getNombre().equals(equipo1.getNombre())
+                            && partidoCol.getEquipoVisitante().getNombre().equals(equipo2.getNombre())) {
+                        parti = partidoCol;
+                    }
                 }
-
                 Equipo equipo = null;
-                String resultado = null;
+                EnumResult resultado = null;
                 if ("1".equals(campos[1])) {
-                    equipo = equipoLocal;
-                    resultado = "ganadorLocal";
-                    if ("1".equals(campos[2])) {
-                        equipo = equipoLocal;
-                        resultado = "empate";
-                    }
-                    if ("1".equals(campos[3])) {
-                        equipo = equipoVisitante;
-                        resultado = "ganadorVisitante";
-                    }
-                    Pronostico pronostico = new Pronostico(partido, equipo, resultado);
-                    puntos = puntos + pronostico.puntos();
-
+                    equipo = equipo1;
+                    resultado = EnumResult.GANADOR;
                 }
-
+                if ("1".equals(campos[2])) {
+                    equipo = equipo1;
+                    resultado = EnumResult.EMPATE;
+                }
+                if ("1".equals(campos[3])) {
+                    equipo = equipo1;
+                    resultado = EnumResult.PERDEDOR;
+                }
+                Pronostico pronostico = new Pronostico(parti, equipo, resultado);
+                puntos += pronostico.puntos();
             }
-
-            //mostrar los resultados
-            System.out.println("La suma de los puntos es: " + puntos);
         }
+        System.out.println("Los puntos obtenidos por el usuario fueron: "+puntos);
 
     }
 }

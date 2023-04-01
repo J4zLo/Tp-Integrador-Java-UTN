@@ -30,6 +30,7 @@ public class Partido {
     }
 
     public void setGolesEquipoLocal(int golesEquipoLocal) {
+
         this.golesEquipoLocal = golesEquipoLocal;
     }
 
@@ -55,24 +56,22 @@ public class Partido {
     }
 
     //Metodo Resultado
-    public String resultadoPartido(Equipo equipo) {
+    public EnumResult resultadoPartido(Equipo equipo) {
         if (golesEquipoLocal == golesEquipoVisitante) {
-            return "empate";
+            return EnumResult.EMPATE;
         }
         if (equipo.getNombre().equals(equipoLocal.getNombre())) {
             if (golesEquipoLocal > golesEquipoVisitante) {
-                return "ganadorLocal";
+                return EnumResult.GANADOR;
             } else {
-                return "perdedorLocal";
+                return EnumResult.PERDEDOR;
             }
-        }
-        else {
+        } else {
             if (golesEquipoLocal < golesEquipoVisitante) {
-                return "ganadorVisitante";
+                return EnumResult.GANADOR;
             } else {
-                return "perdedorLocal";
+               return EnumResult.PERDEDOR;
             }
         }
     }
 }//Fin
-
