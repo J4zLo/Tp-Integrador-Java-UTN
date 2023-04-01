@@ -24,10 +24,9 @@ public class Pronostico {
 
     public int puntos(){
         String resultadoPartido = this.partido.resultadoPartido(this.equipo);
-        if(resultadoProno.equals(resultadoPartido)){
+        if(this.resultadoProno.equals(resultadoPartido)){
             return 1;
         } else {
-
         }
         return 0;
 

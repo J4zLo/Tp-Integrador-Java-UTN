@@ -7,10 +7,17 @@ public class Partido {
     private int golesEquipoVisitante;
 
 
-    //Constructor
-    public Partido(Equipo equipo1, Equipo equipo2) {
-        this.equipoLocal = equipo1;
-        this.equipoVisitante = equipo2;
+    //Constructores
+    public Partido(Equipo equipoLocal, Equipo equipoVisitante) {
+        this.equipoLocal = equipoLocal;
+        this.equipoVisitante = equipoVisitante;
+    }
+    public Partido(Equipo equipoLocal, int golesEquipoLocal, int golesEquipoVisitante, Equipo equipoVisitante) {
+        this.equipoLocal = equipoLocal;
+        this.equipoVisitante = equipoVisitante;
+        this.golesEquipoLocal = golesEquipoLocal;
+        this.golesEquipoVisitante = golesEquipoVisitante;
+
     }
 
     //Setters
@@ -22,12 +29,12 @@ public class Partido {
         this.equipoVisitante = equipoVisitante;
     }
 
-    public void setGolesEquipo1(int golesEquipo1) {
-        this.golesEquipoLocal = golesEquipo1;
+    public void setGolesEquipoLocal(int golesEquipoLocal) {
+        this.golesEquipoLocal = golesEquipoLocal;
     }
 
-    public void setGolesEquipo2(int golesEquipo2) {
-        this.golesEquipoVisitante = golesEquipo2;
+    public void setGolesEquipoVisitante(int golesEquipoVisitante) {
+        this.golesEquipoVisitante = golesEquipoVisitante;
     }
 
     //Getters
@@ -39,23 +46,33 @@ public class Partido {
         return equipoVisitante;
     }
 
-    public int getGolesEquipo1() {
+    public int getGolesEquipoLocal() {
         return golesEquipoLocal;
     }
 
-    public int getGolesEquipo2() {
+    public int getGolesEquipoVisitante() {
         return golesEquipoVisitante;
     }
 
     //Metodo Resultado
     public String resultadoPartido(Equipo equipo) {
-        if (equipo.equals(equipoLocal)) {
+        if (golesEquipoLocal == golesEquipoVisitante) {
+            return "empate";
+        }
+        if (equipo.getNombre().equals(equipoLocal.getNombre())) {
             if (golesEquipoLocal > golesEquipoVisitante) {
                 return "ganadorLocal";
+            } else {
+                return "perdedorLocal";
             }
         }
-        return "completar";
-        //pendiente
+        else {
+            if (golesEquipoLocal < golesEquipoVisitante) {
+                return "ganadorVisitante";
+            } else {
+                return "perdedorLocal";
+            }
+        }
     }
 }//Fin
 
