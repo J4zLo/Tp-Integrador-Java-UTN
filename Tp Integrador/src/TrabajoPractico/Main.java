@@ -91,7 +91,7 @@ public class Main {
                 puntos += pronostico.puntos();
             }
         }
-        System.out.println("Los puntos obtenidos por el usuario fueron: "+puntos);
-
+        System.out.println("Total de puntos obtenidos por el usuario: "+puntos);
+      
     }
 }
