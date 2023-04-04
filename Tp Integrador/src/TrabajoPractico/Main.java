@@ -75,15 +75,15 @@ public class Main {
                 }
                 Equipo equipo = null;
                 EnumResult resultado = null;
-                if ("1".equals(campos[1])) {
+                if ("X".equals(campos[1])) {
                     equipo = equipo1;
                     resultado = EnumResult.GANADOR;
                 }
-                if ("1".equals(campos[2])) {
+                if ("X".equals(campos[2])) {
                     equipo = equipo1;
                     resultado = EnumResult.EMPATE;
                 }
-                if ("1".equals(campos[3])) {
+                if ("X".equals(campos[3])) {
                     equipo = equipo1;
                     resultado = EnumResult.PERDEDOR;
                 }
